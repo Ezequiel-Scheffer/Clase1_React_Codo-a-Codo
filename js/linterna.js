@@ -1,4 +1,4 @@
-let estado_linterna = "apagado";
+let estado_linterna = false;
 
 /* capturo el sonido */
 let sonido_batman = document.querySelector("#bati_encendido");
@@ -7,28 +7,25 @@ let sonido_click = document.querySelector("#bati_click");
 let batman = document.querySelector(".batman");
 let bati_boton = document.querySelector(".bati_boton");
 
-/* evento */
+/* evento by Ezequiel*/
 
-bati_boton.addEventListener("click", controlar_linterna);
-
-function controlar_linterna() {
-  if (estado_linterna == "apagado") {
-    estado_linterna = "encendido";
-    sonido();
-    batman.classList.add("batman_activo");
-  } else {
-    estado_linterna = "apagado";
-    sonido();
-    batman.classList.remove("batman_activo");
-  }
-}
+bati_boton.addEventListener("click", () =>{
+  !estado_linterna
+  ?(
+    estado_linterna = true,
+    sonido(),
+    batman.classList.toggle("batman_activo"))
+  :(
+    estado_linterna = false,
+    sonido(),
+    batman.classList.toggle("batman_activo")
+  )
+});
 
 function sonido() {
-  if (sonido_batman.paused) {
-    sonido_click.play();
-    sonido_batman.play();
-  } else {
-    sonido_click.play();
-    sonido_batman.pause();
+  sonido_batman.paused
+  ? (sonido_click.play(),
+    sonido_batman.play())
+  : (sonido_click.play(),
+    sonido_batman.pause())
   }
-}
